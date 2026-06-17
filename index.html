@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>БатБайгаль Cakery — Menu</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green: #1a5c38;
+    --green-dark: #0f3d25;
+    --green-light: #eaf4ee;
+    --gold: #e8a020;
+    --text: #1a1a1a;
+    --muted: #777;
+    --border: #e8e8e8;
+    --bg: #f4f6f4;
+    --white: #ffffff;
+    --radius: 20px;
+  }
+  .hero-header {
+  position: relative;
+  height: 500px;
+  overflow: hidden;
+}
+
+.slider {
+  position: absolute;
+  inset: 0;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  animation: fade 25s infinite;
+}
+
+/* Баннер зургууд */
+.slide:nth-child(1) {
+  background-image: url("images/banner.jpg");
+  animation-delay: 0s;
+}
+
+.slide:nth-child(2) {
+  background-image: url("images/banner1.jpg");
+  animation-delay: 5s;
+}
+
+.slide:nth-child(3) {
+  background-image: url("images/banner5.jpg");
+  animation-delay: 10s;
+}
+.slide:nth-child(4) {
+  background-image: url("images/banner4.jpg");
+  animation-delay: 15s;
+}
+.slide:nth-child(5) {
+  background-image: url("images/banner6.jpg");
+  animation-delay: 20s;
+}
+@keyframes fade {
+  10%, 10% {
+    opacity: 1;
+  }
+  50%, 50% {
+    opacity: 0;
+  }
+}
+
+.overlay {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0,0,0,0);
+  color: white;
+  text-align: center;
+  border-radius: 30px;
+}
+
+  .modal{
+    display:none;
+    position:fixed;
+    z-index:9999;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.5);
+}
+
+.modal-content{
+    background:#fff;
+    width:90%;
+    max-width:400px;
+    margin:10% auto;
+    padding:30px;
+    border-radius:20px;
+    text-align:center;
+    position:relative;
+    animation:fadeIn 0.3s ease;
+}
+
+.close{
+    position:absolute;
+    top:10px;
+    right:18px;
+    font-size:32px;
+    cursor:pointer;
+}
+
+.modal-content h2{
+    margin-bottom:15px;
+}
+
+.modal-content p{
+    line-height:1.7;
+    margin-bottom:25px;
+}
+
+.modal-buttons{
+    display:flex;
+    gap:15px;
+    justify-content:center;
+    flex-wrap:wrap;
+}
+
+.call-btn,
+.fb-btn{
+    padding:12px 20px;
+    border-radius:12px;
+    text-decoration:none;
+    color:#fff;
+    font-weight:600;
+}
+
+.call-btn{
+    background:#d4af37;
+}
+
+.fb-btn{
+    background:#1877f2;
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(-20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.logo {
+  width: 360px;
+    margin-top: 1.5rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: #20522a;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 50px;
+    padding: 0.55rem 1.5rem;
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.85);
+}
+
+
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    background: linear-gradient(160deg, #0f3d25 0%, #1a5c38 60%, #2d8a57 100%);
+    color: white;
+    padding: 3rem 2rem 2.5rem;
+    text-align: center;
+  }
+  .tagline {
+    margin-top: 1rem;
+    font-style: italic;
+    font-size: 1rem;
+    color: rgba(255,255,255,0.75);
+  }
+  .contact-pill {
+    margin-top: 1.5rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background:#20522a;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 50px;
+    padding: 0.55rem 1.5rem;
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.85);
+  }
+  .contact-pill strong { font-size: 1.1rem; color: white; letter-spacing: 1px; }
+
+  /* NAV */
+  nav {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    display: flex;
+    justify-content: center;
+    top: 0;
+    z-index: 100;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  nav::-webkit-scrollbar { display: none; }
+  .nav-inner { display: flex; padding: 0 1.5rem; white-space: nowrap; }
+  .nav-tab {
+    justify-content: center;
+    align-items: center;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 1rem 1.2rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .nav-tab:hover { color: var(--green); }
+  .nav-tab.active { color: var(--green); border-bottom-color: var(--green); }
+
+  /* MAIN */
+  main { max-width: 1100px; margin: 0 auto; padding: 3rem 1.5rem 5rem; }
+  .section { display: none; }
+  .section.active { display: block; }
+
+  .section-header { margin-bottom: 2.5rem; }
+  .section-header h2 {
+    font-size: 1.9rem;
+    font-weight: 300;
+    color: var(--green-dark);
+    letter-spacing: 1px;
+  }
+  .section-header h2 em {
+    font-size: 1rem;
+    color: var(--muted);
+    font-weight: 400;
+    margin-left: 0.5rem;
+  }
+  .section-header p {
+    font-size: 0.88rem;
+    color: var(--muted);
+    margin-top: 0.4rem;
+  }
+
+.price-grid {
+  background: #20522a;
+  border-radius: 20px;
+  padding: 32px;
+  color: white;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 GRID FIXED */
+  gap: 20px;
+  text-align: center;
+}
+
+.size {
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--sage);
+}
+
+.price {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--gold);
+  margin: 4px 0;
+}
+
+.desc {
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+}
+
+/* 📱 Responsive */
+@media (max-width: 768px) {
+  .price-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .price-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+  /* SIZE BANNER
+  .size-banner {
+    background: var(--green);
+    color: white;
+    border-radius: 14px;
+    padding: 1rem 1.5rem;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    font-size: 1rem;
+  }
+  .size-banner span { opacity: 0.7; }
+  .size-banner strong { color: var(--gold); margin-left: 6px; }
+
+  /* CATEGORY */
+  .cat {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 2.5rem 0 1.5rem;
+  }
+  .cat:first-child { margin-top: 0; }
+  .cat h3 {
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--green);
+    white-space: nowrap;
+  }
+  .cat::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  /* CARD GRID */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 2.5rem 1.5rem;
+    padding-top: 1.5rem;
+  }
+
+  /* THE FLOATING CARD */
+  .cake-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 0 1rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    margin-top: 60px;
+  }
+  .cake-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 32px rgba(26,92,56,0.15);
+  }
+
+  /* FLOATING IMAGE */
+  .cake-img-wrap {
+    position: absolute;
+    top: -80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 220px;
+    height: 220px;
+  }
+  .cake-img-wrap img {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* CARD BODY */
+  .cake-body {
+    margin-top: 80px;
+    text-align: center;
+    width: 100%;
+  }
+  .cake-name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+    margin-top: 60px;
+  }
+  .cake-name-mn {
+    font-size: 0.75rem;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 0.6rem;
+  }
+  .cake-ing {
+    font-size: 0.73rem;
+    color: var(--muted);
+    line-height: 1.55;
+    margin-bottom: 1rem;
+  }
+
+  /* ADD TO CART button */
+  .cake-btn {
+    display: block;
+    width: 100%;
+    background: var(--green);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 0.6rem 0.5rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .cake-btn:hover { background: var(--green-dark); }
+
+  .prices {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px;
+    margin-bottom: 0.75rem;
+  }
+  .price {
+    background: var(--green-light);
+    color: var(--green);
+    border-radius: 6px;
+    padding: 3px 9px;
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+  .price.gold { background: #fff8e6; color: #9a6800; }
+
+  /* WEDDING */
+  .wedding-card {
+    background: var(--green);
+    color: white;
+    border-radius: var(--radius);
+    padding: 1.5rem;
+  }
+  .wedding-card h4 {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: var(--gold);
+    margin-bottom: 0.3rem;
+    letter-spacing: 1px;
+  }
+  .wedding-card p { font-size: 0.78rem; opacity: 0.65; margin-bottom: 1rem; }
+  .tier-row {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid rgba(255,255,255,0.13);
+    padding: 0.5rem 0;
+    font-size: 0.82rem;
+  }
+  .tier-row .tn { color: rgba(255,255,255,0.72); }
+  .tier-row .tp { font-weight: 700; color: var(--gold); }
+
+  .note {
+    font-size: 0.78rem;
+    font-style: italic;
+    color: var(--muted);
+    margin-top: 1.5rem;
+    padding: 1rem;
+    border-left: 3px solid var(--green-light);
+  }
+
+  footer {
+    background: var(--green-dark);
+    color: rgba(255,255,255,0.65);
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.82rem;
+  }
+  footer strong { color: white; font-size: 1.3rem; display: block; margin-bottom: 0.3rem; }
+</style>
+</head>
+<body>
+
+<header class="hero-header">
+
+  <!-- Background slider -->
+  <div class="slider">
+    <div class="slide active"></div>
+    <div class="slide"></div>
+    <div class="slide"></div>
+    <div class="slide"></div>
+    <div class="slide"></div>
+  </div>
+
+  <div class="overlay">
+    <img src="C:/Users/user/Desktop/аа/logo.png" alt="Logo" class="logo">
+    <p class="tagline">"Амт бол Аз жаргал"</p>
+    <div class="contact-pill">
+      📞 Захиалга өгөх <strong>7000-0004</strong>
+    </div>
+  </div>
+
+</header>
+
+<nav>
+  <div class="nav-inner">
+    <button class="nav-tab active" onclick="show('elite',this)">Элит бялуу</button>
+    <button class="nav-tab" onclick="show('classic',this)">Амтлаг бялуу</button>
+    <button class="nav-tab" onclick="show('slices',this)">Зүсмэл</button>
+    <button class="nav-tab" onclick="show('custom',this)">Захиалгын бялуу</button>
+    <button class="nav-tab" onclick="show('bakery',this)">Бэйкери</button>
+    <button class="nav-tab" onclick="show('savory',this)">Махан бүтээгдэхүүн</button>
+  </div>
+</nav>
+
+<main>
+
+<!-- ELITE -->
+<section id="elite" class="section active">
+  <div class="section-header">
+    <h2>Элит бялуу <em>Elite Cakes</em></h2>
+    <p>Онцгой тохиолдолд зориулсан premium бялуунууд</p>
+  </div>
+  <div class="grid">
+
+    <div class="cake-card">
+      <div class="cake-img-wrap"><img src="images\alag.png" alt="Алаг бялуу"></div>
+      <div class="cake-body">
+        <div class="cake-name">Алаг бялуу</div>
+        <div class="cake-name-mn"></div>
+        <div class="cake-ing">Гурил, сахар, масло, өндөг, сүү, цөцгий, шоклад, желатин</div>
+        <div class="prices"><span class="price">№3 — ₮52,900</span></div>
+      </div>
+    </div>
+
+    <div class="cake-card">
+      <div class="cake-img-wrap"><img src="images\aarts.png" alt="Аарцтай бялуу"></div>
+      <div class="cake-body">
+        <div class="cake-name">Аарцтай бялуу</div>
+        <div class="cake-name-mn"></div>
+        <div class="cake-ing">Гурил, сахар, масло, өндөг, сүү, сир амтлаг крем, ванила сахар</div>
+        <div class="prices"><span class="price">№3 — ₮42,900</span><span class="price">№4 — ₮48,900</span></div>
+      </div>
+    </div>
+
+    <div class="cake-card">
+      <div class="cake-img-wrap"><img src="images\3d.png" alt="3D бялуу"></div>
+      <div class="cake-body">
+        <div class="cake-name">3D бялуу</div>
+        <div class="cake-name-mn">3D Cake</div>
+        <div class="cake-ing">Гурил, сахар, өндөг, сүү, амтлаг крем, гүзээлзгэний чанамал, ананасны чанамал, желатин</div>
+        <div class="prices"><span class="price">№3 — ₮52,900</span></div>
+      </div>
+    </div>
+
+    <div class="cake-card">
+      <div class="cake-img-wrap"><img src="images\cherry.png" alt="Черри бялуу"></div>
+      <div class="cake-body">
+        <div class="cake-name">Черри бялуу</div>
+        <div class="cake-name-mn">Cherry Cake</div>
+        <div class="cake-ing">Гурил, сахар, өндөг, амтлаг крем, шоколад, черри жимс</div>
+        <div class="prices"><span class="price">№3 — ₮42,900</span><span class="price">№4 — ₮48,900</span></div>
+      </div>
+    </div>
+
+    <div class="cake-card">
+      <div class="cake-img-wrap"><img src="images\elit.png" alt="Элит бялуу"></div>
+      <div class="cake-body">
+        <div class="cake-name">Элит бялуу</div>
+        <div class="cake-name-mn">Elite Cake</div>
+        <div class="cake-ing">Гурил, сахар, масло, өндөг, сүү, цөцгий, шоклад, желатин</div>
+        <div class="prices"><span class="price">№3 — ₮52,900</span></div>
+      </div>
+    </div>
+
+    <div class="cake-card">
+      <div class="cake-img-wrap"><img src="images\shokomuss.png" alt="Шоколадтай мусс"></div>
+      <div class="cake-body">
+        <div class="cake-name">Шоколадтай мусс</div>
+        <div class="cake-name-mn">Chocolate Mousse</div>
+        <div class="cake-ing">Гурил, сахар, масло, өндөг, сүү, цөцгий, шоклад, желатин</div>
+        <div class="prices"><span class="price">№3 — ₮42,900</span><span class="price">№4 — ₮48,900</span></div>
+      </div>
+    </div>
+
+    <div class="cake-card">
+      <div class="cake-img-wrap"><img src="images\american.png" alt="Американ бялуу"></div>
+      <div class="cake-body">
+        <div class="cake-name">Американ бялуу</div>
+        <div class="cake-name-mn">American Cake</div>
+        <div class="cake-ing">Гурил, сахар, масло, өндөг, сүү, сир амтлаг крем, ванила сахар, крем чанамал шоколад</div>
+        <div class="prices"><span class="price">№3 — ₮42,900</span><span class="price">№4 — ₮48,900</span></div>
+      </div>
+    </div>
+
+    <div class="cake-card">
+      <div class="cake-img-wrap"><img src="images\col.png" alt="Коллекшин"></div>
+      <div class="cake-body">
+        <div class="cake-name">Коллекшин</div>
+        <div class="cake-name-mn">Party Collection</div>
+        <div class="cake-ing">Гурил, сахар, өндөг, амтлаг крем, шоколад, 3 төрлийн чанамал, ирис желатин, гялтагнуур</div>
+        <div class="prices"><span class="price gold">₮60,000</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CLASSIC -->
+<section id="classic" class="section">
+  <div class="section-header">
+    <h2>Амтлаг бялуу <em>Classic Cakes</em></h2>
+    <p>Гурил /БГО55/, Элсэн чихэр, масло, амтлаг крем</p>
+  </div>
+    <div class="price-grid">
+  <div>
+    <div class="size">№2</div>
+    <div class="price">32,900₮</div>
+    <div class="desc">Гурил /БГО55/, Элсэн чихэр, масло, амтлаг крем</div>
+  </div>
+
+  <div>
+    <div class="size">№3</div>
+    <div class="price">37,500₮</div>
+    <div class="desc">Гурил /БГО55/, Элсэн чихэр, масло, амтлаг крем</div>
+  </div>
+
+  <div>
+    <div class="size">№4</div>
+    <div class="price">43,500₮</div>
+    <div class="desc">Гурил /БГО55/, Элсэн чихэр, масло, амтлаг крем</div>
+  </div>
+
+  <div>
+    <div class="size">№5</div>
+    <div class="price">48,500₮</div>
+    <div class="desc">Гурил /БГО55/, Элсэн чихэр, масло, амтлаг крем</div>
+  </div>
+</div>
+<div class="grid">
+  <div class="cake-card">
+    <div class="cake-img-wrap">
+      <img src="images\a1.png" alt="">
+    </div>
+    <div class="cake-body">
+      <div class="cake-name">Загвар 1</div>
+      <div class="cake-ing">Гурил, элсэн чихэр, масло, амтлаг крем</div>
+    </div>
+  </div>
+
+  <div class="cake-card">
+    <div class="cake-img-wrap">
+      <img src="images\a2.png" alt="">
+    </div>
+    <div class="cake-body">
+      <div class="cake-name">Загвар 2</div>
+      <div class="cake-ing">Гурил, элсэн чихэр, масло, амтлаг крем</div>
+    </div>
+  </div>
+   <div class="cake-card">
+    <div class="cake-img-wrap">
+      <img src="images\a3.png" alt="">
+    </div>
+    <div class="cake-body">
+      <div class="cake-name">Загвар 3</div>
+      <div class="cake-ing">Гурил, элсэн чихэр, масло, амтлаг крем</div>
+    </div>
+  </div>
+    <div class="cake-card">
+    <div class="cake-img-wrap">
+      <img src="images\a4.png" alt="">
+    </div>
+    <div class="cake-body">
+      <div class="cake-name">Загвар 4</div>
+      <div class="cake-ing">Гурил, элсэн чихэр, масло, амтлаг крем</div>
+    </div>
+  </div>
+
+  <div class="cake-card">
+    <div class="cake-img-wrap">
+      <img src="images\a5.png" alt="">
+    </div>
+    <div class="cake-body">
+      <div class="cake-name">Загвар 5</div>
+      <div class="cake-ing">Гурил, элсэн чихэр, масло, амтлаг крем</div>
+    </div>
+  </div>
+   <div class="cake-card">
+    <div class="cake-img-wrap">
+      <img src="images\a6.png" alt="">
+    </div>
+    <div class="cake-body">
+      <div class="cake-name">Загвар 6</div>
+      <div class="cake-ing">Гурил, элсэн чихэр, масло, амтлаг крем</div>
+    </div>
+  </div>
+    <div class="cake-card">
+    <div class="cake-img-wrap">
+      <img src="images\a7.png" alt="">
+    </div>
+    <div class="cake-body">
+      <div class="cake-name">Загвар 7</div>
+      <div class="cake-ing">Гурил, элсэн чихэр, масло, амтлаг крем</div>
+    </div>
+  </div>
+     <div class="cake-card">
+    <div class="cake-img-wrap">
+      <img src="images\a8.png" alt="">
+    </div>
+    <div class="cake-body">
+      <div class="cake-name">Загвар 8</div>
+      <div class="cake-ing">Гурил, элсэн чихэр, масло, амтлаг крем</div>
+    </div>
+  </div>
+    <div class="cake-card">
+    <div class="cake-img-wrap">
+      <img src="images\a9.png" alt="">
+    </div>
+    <div class="cake-body">
+      <div class="cake-name">Загвар 9</div>
+      <div class="cake-ing">Гурил, элсэн чихэр, масло, амтлаг крем</div>
+    </div>
+  </div>
+     <div class="cake-card">
+    <div class="cake-img-wrap">
+      <img src="images\a10.png" alt="">
+    </div>
+    <div class="cake-body">
+      <div class="cake-name">Загвар 10</div>
+      <div class="cake-ing">Гурил, элсэн чихэр, масло, амтлаг крем</div>
+    </div>
+
+</div>
+  </div>
+</section>
+
+<!-- SLICES -->
+<section id="slices" class="section">
+  <div class="section-header">
+    <h2>Зүсмэл <em>Cake Slices</em></h2>
+    <p>Нэг хүнд зориулсан хэсэг бялуу</p>
+  </div>
+  <div class="grid">
+    <div class="cake-card"><div class="cake-img-wrap"><img src="images\choko.png" alt=""></div><div class="cake-body"><div class="cake-name">Шоколадтай пай</div><div class="cake-ing">Гурил, сахар, масло, өндөг, сүү, цөцгий, шоколад, желатин</div><button class="cake-btn">4,800₮</button></div></div>
+    <div class="cake-card"><div class="cake-img-wrap"><img src="images\pie1.png" alt=""></div><div class="cake-body"><div class="cake-name">Нэрстэй пай</div><div class="cake-ing">Гурил, сахар, масло, өндөг, сүү, цөцгий, шоколад, желатин</div><button class="cake-btn">4,800₮</button></div></div>
+    <div class="cake-card"><div class="cake-img-wrap"><img src="images\aarts1.png" alt=""></div><div class="cake-body"><div class="cake-name">Аарцтай бялуу</div><div class="cake-ing">Гурил, сахар, масло, өндөг, сүү, цөцгий, шоколад, желатин</div><button class="cake-btn">6,500₮</button></div></div>
+    <div class="cake-card"><div class="cake-img-wrap"><img src="images\muss.png" alt=""></div><div class="cake-body"><div class="cake-name">Шоко мусс</div><div class="cake-ing">Гурил, сахар, масло, өндөг, сүү, цөцгий, шоколад, желатин</div><button class="cake-btn">6,500₮</button></div></div>
+    <div class="cake-card"><div class="cake-img-wrap"><img src="images\alag1.png" alt=""></div><div class="cake-body"><div class="cake-name">Алаг бялуу</div><div class="cake-ing">Гурил, сахар, масло, өндөг, сүү, цөцгий, шоколад, желатин</div><button class="cake-btn">6,500₮</button></div></div>
+    <div class="cake-card"><div class="cake-img-wrap"><img src="images\muss1.png" alt=""></div><div class="cake-body"><div class="cake-name">Шоко чийз</div><div class="cake-ing">Гурил, сахар, масло, өндөг, сүү, цөцгий, шоколад, желатин</div><button class="cake-btn">6,500₮</button></div></div>
+    <div class="cake-card"><div class="cake-img-wrap"><img src="images\cheese.png" alt=""></div><div class="cake-body"><div class="cake-name">Чийз</div><div class="cake-ing">Гурил, сахар, масло, өндөг, сүү, цөцгий, шоколад, желатин</div><button class="cake-btn">6,500₮</button></div></div>
+  </div>
+
+</section>
+
+<!-- CUSTOM -->
+<section id="custom" class="section">
+  <div class="section-header">
+    <h2>Захиалгын бялуу <em>Custom Orders</em></h2>
+    <p>Өөрийн хүссэн өнгө загвараар хийлгэх боломжтой</p>
+  </div>
+
+  <div class="cat"><h3>Дөрвөлжин бялуу</h3></div>
+  <div class="grid">
+    <div class="cake-card"><div class="cake-img-wrap"><img src="images\4ljin2.png" alt=""></div><div class="cake-body"><div class="cake-name">35×25 см</div><div class="cake-ing">Гурил, сахар, масло, өндөг, сүү, цөцгий, шоколад, желатин</div><div class="prices"><span class="price gold">₮110,000</span></div><button class="cake-btn" onclick="openOrderModal()">Захиалах</button></div></div>
+    <div class="cake-card"><div class="cake-img-wrap"><img src="images\4ljin.png" alt=""></div><div class="cake-body"><div class="cake-name">55×35 см</div><div class="cake-ing">Гурил, сахар, масло, өндөг, сүү, цөцгий, шоколад, желатин</div><div class="prices"><span class="price gold">₮190,000</span></div><button class="cake-btn" onclick="openOrderModal()">Захиалах</button></div></div>
+  </div>
+
+  <div class="cat"><h3>Нэг давхар захиалгын бялуу</h3></div>
+  <div class="grid">
+    <div class="cake-card"><div class="cake-img-wrap"><img src="images\3threee.png" alt=""></div><div class="cake-body"><div class="cake-name">3 үе кекстэй</div><div class="cake-ing">Гурил, сахар, масло, өндөг, сүү, цөцгий</div><div class="prices"><span class="price">№3 ₮45,000</span><span class="price">№4 ₮50,000</span><span class="price">№5 ₮55,000</span><span class="price">№6 ₮81,000</span></div><button class="cake-btn" onclick="openOrderModal()">Захиалах</button></div></div>
+    <div class="cake-card"><div class="cake-img-wrap"><img src="images\4four.png" alt=""></div><div class="cake-body"><div class="cake-name">4 үе кекстэй</div><div class="cake-ing">Гурил, сахар, масло, өндөг, сүү, цөцгий</div><div class="prices"><span class="price">№3 ₮50,000</span><span class="price">№4 ₮55,000</span><span class="price">№5 ₮60,000</span></div><button class="cake-btn" onclick="openOrderModal()">Захиалах</button></div></div>
+  </div>
+
+  <div class="cat"><h3>Давхар бялуу</h3></div>
+  <div class="grid">
+    <div class="cake-card"><div class="cake-img-wrap"><img src="images\gg1.png" alt=""></div><div class="cake-body"><div class="cake-name">2–5 давхар бялуу</div><div class="cake-ing">Гурил, сахар, масло, өндөг, сүү, цөцгий · загвар болон чимэглэлээс хамааарч үнэ өөрчлөгдөх боломжтой</div><div class="prices"><span class="price">2/№3 ₮45,000</span><span class="price">2/№4 ₮50,000</span><span class="price">3/№4 ₮55,000</span><span class="price">5/№4 ₮81,000</span></div><button class="cake-btn" onclick="openOrderModal()">Захиалах</button></div></div>
+      <p class="note">* Өөрийн хүссэн өнгө загвараар хийлгэх боломжтой. Захиалга өгөх: 7000-0004</p>
+  </div>
+
+  <div class="cat"><h3>Хуримын бялуу</h3></div>
+  <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(260px,1fr)); gap:1rem;">
+    <div class="cake-card"><div class="cake-img-wrap"><img src="images\wedding.png" height="100px" width="200px" alt=""></div><div class="cake-body"><div class="cake-name">Хуримын бялуу</div><div class="cake-ing">Загвар болон чимэглэлээс хамааарч үнэ өөрчлөгдөх боломжтой</div><div class="prices"><span class="price"></span><span class="price"></span><span class="price"></span><span class="price"></span></div><button class="cake-btn" onclick="openOrderModal()">Захиалах</button></div></div>
+    <div class="wedding-card">
+      <h4>Хуримын бялуу — Wedding Cake</h4>
+      <p>Гурил, сахар, масло, өндөг, сүү, цөцгий · Загвар болон чимэглэлээс хамааарч үнэ өөрчлөгдөнө</p>
+      <div class="tier-row"><span class="tn">2 давхар / суурьтай</span><span class="tp">₮225,000</span></div>
+      <div class="tier-row"><span class="tn">3 давхар / суурьтай</span><span class="tp">₮280,000</span></div>
+      <div class="tier-row"><span class="tn">5 давхар / суурьтай</span><span class="tp">₮490,000</span></div>
+      <div class="tier-row"><span class="tn">7 давхар / суурьтай</span><span class="tp">₮790,000</span></div>
+      <div class="tier-row"><span class="tn">9 давхар / суурьтай</span><span class="tp">₮950,000</span></div>
+      <div class="tier-row"><span class="tn">Хуримын 10 давхар</span><span class="tp">₮1,800,000</span></div>
+    </div>
+  </div>
+  <p class="note">* Өөрийн хүссэн өнгө загвараар хийлгэх боломжтой. Захиалга өгөх: 7000-0004</p>
+</section>
+
+<!-- BAKERY -->
+<section id="bakery" class="section">
+  <div class="section-header">
+    <h2>Бэйкери <em>Bakery</em></h2>
+    <p>Рулет, дессэрт, тэргүүн, пирог — өдөр бүр шинэхэн</p>
+  </div>
+
+  <div class="cat"><h3>Рулет</h3></div>
+  <div class="grid">
+    <div class="cake-card"><div class="cake-img-wrap"><img src="images\rul3.png" alt=""></div><div class="cake-body"><div class="cake-name">Шоколадтай / Рэдвэлвет рулет</div><div class="cake-ing">Гурил, сахар, масло, өндөг, амтлаг крем</div><button class="cake-btn">4,500₮</button></div></div>
+    <div class="cake-card"><div class="cake-img-wrap"><img src="images\rul2.png" alt=""></div><div class="cake-body"><div class="cake-name">Рулет сет</div><div class="cake-ing">Гурил, сахар, масло, өндөг, амтлаг крем</div><button class="cake-btn">9,500₮</button></div></div>
+    <div class="cake-card"><div class="cake-img-wrap"><img src="images\rul2.png" alt=""></div><div class="cake-body"><div class="cake-name">Алаг рулет</div><div class="cake-ing">Гурил, сахар, масло, өндөг, амтлаг крем, жимсний чанамал</div><button class="cake-btn">6,700₮</button></div></div>
+  </div>
+
+  <div class="cat"><h3>Дессэрт</h3></div>
+  <div class="grid">
+    <div class="cake-card"><div class="cake-img-wrap"><img src="images\dessert1.png" alt=""></div><div class="cake-body"><div class="cake-name">Гүзээлзгэнэ дессэрт / Шоколадтай дессэрт</div><div class="cake-ing">Гурил, сахар, масло, өндөг, сүү, цөцгий, шоколад, желатин</div><button class="cake-btn">5,700₮</button></div></div>
+    <div class="cake-card"><div class="cake-img-wrap"><img src="images\bento.png" alt=""></div><div class="cake-body"><div class="cake-name">Бенто бялуу</div><div class="cake-ing">Гурил, сахар, масло, өндөг, сүү, цөцгий, шоколад, желатин</div><button class="cake-btn">15,000₮</button></div></div>
+    <div class="cake-card"><div class="cake-img-wrap"><img src="images\mini3.png" alt=""></div><div class="cake-body"><div class="cake-name">Иристэй мини</div><div class="cake-ing">Гурил, сахар, масло, өндөг, сүү, цөцгий, шоколад, желатин</div><button class="cake-btn">6,900₮</button></div></div>
+    <div class="cake-card"><div class="cake-img-wrap"><img src="images\mini2.png" alt=""></div><div class="cake-body"><div class="cake-name">Шоколадтай мини</div><div class="cake-ing">Гурил, сахар, масло, өндөг, сүү, цөцгий, шоколад, желатин</div><button class="cake-btn">6,900₮</button></div></div>
+    <div class="cake-card"><div class="cake-img-wrap"><img src="images\mini1.png" alt=""></div><div class="cake-body"><div class="cake-name">Жимстэй мини</div><div class="cake-ing">Гурил, сахар, масло, өндөг, сүү, цөцгий, шоколад, желатин</div><button class="cake-btn">6,900₮</button></div></div>
+    <div class="cake-card"><div class="cake-img-wrap"><img src="images\durwuljin.png" alt=""></div><div class="cake-body"><div class="cake-name">Дөрвөлжин дессэрт</div><div class="cake-ing">Гурил, сахар, масло, өндөг, сүү, амтлаг крем, жимсний чанамал</div><button class="cake-btn">5,800₮</button></div></div>
+    <div class="cake-card"><div class="cake-img-wrap"><img src="images\donat.png" alt=""></div><div class="cake-body"><div class="cake-name">Донат</div><div class="cake-ing">Гурил, сахар, масло, өндөг, сүү, цөцгий, шоколад</div><button class="cake-btn">1ш 3,900₮ / 3ш 8,500₮</button></div></div>
+    <div class="cake-card"><div class="cake-img-wrap"><img src="images\keks.png" alt=""></div><div class="cake-body"><div class="cake-name">Шоколадтай кекс</div><div class="cake-ing">Гурил, сахар, масло, өндөг, сүү, цөцгий, шоколад</div><button class="cake-btn">7,700₮</button></div></div>
+    <div class="cake-card"><div class="cake-img-wrap"><img src="images\choko1.png" alt=""></div><div class="cake-body"><div class="cake-name">Чокоболл</div><div class="cake-ing">Гурил, сахар, масло, өндөг, сүү, цөцгий, шоколад</div><button class="cake-btn">4,200₮</button></div></div>
+    <div class="cake-card"><div class="cake-img-wrap"><img src="images\miniekler.png" alt=""></div><div class="cake-body"><div class="cake-name">Мини эклер</div><div class="cake-ing">Гурил, сахар, масло, өндөг, сүү, цөцгий, шоколад</div><button class="cake-btn">3,500₮</button></div></div>
+    <div class="cake-card"><div class="cake-img-wrap"><img src="images\ekler.png" alt=""></div><div class="cake-body"><div class="cake-name">Эклер</div><div class="cake-ing">Гурил, сахар, масло, өндөг, сүү, цөцгий, шоколад</div><button class="cake-btn">6,500₮</button></div></div>
+    <div class="cake-card"><div class="cake-img-wrap"><img src="images\tart.png" alt=""></div><div class="cake-body"><div class="cake-name">Тарт</div><div class="cake-ing">Гурил, сахар, масло, өндөг, сүү, жимсний чанамал, амтлаг крем</div><button class="cake-btn">4,500₮</button></div></div>
+    <div class="cake-card"><div class="cake-img-wrap"><img src="images\tart1.png" alt=""></div><div class="cake-body"><div class="cake-name">Мини тарт</div><div class="cake-ing">Гурил, сахар, масло, өндөг, сүү, жимсний чанамал, амтлаг крем</div><button class="cake-btn">3,500₮</button></div></div>
+    <div class="cake-card"><div class="cake-img-wrap"><img src="images\cupcake.png" alt=""></div><div class="cake-body"><div class="cake-name">Cupcake</div><div class="cake-ing">Гурил, сахар, масло, өндөг, сүү, цөцгий, шоколад</div><button class="cake-btn">1ш 3,500₮ / 2ш 7,500₮</button></div></div>
+    <div class="cake-card"><div class="cake-img-wrap"><img src="images\jims1.png" alt=""></div><div class="cake-body"><div class="cake-name">Печень, жимстэй мини</div><div class="cake-ing">Гурил, сахар, масло, өндөг, сүү, цөцгий, шоколад</div><button class="cake-btn">7,900₮</button></div></div>
+  </div>
+
+  <div class="cat"><h3>Пирог</h3></div>
+  <div class="grid">
+    <div class="cake-card"><div class="cake-img-wrap"><img src="images\pirog1.png" alt=""></div><div class="cake-body"><div class="cake-name">Шанзтай пирог</div><div class="cake-ing">Гурил, сахар, масло, өндөг, сүү, цөцгий, шоколад</div><button class="cake-btn">4,600₮</button></div></div>
+    <div class="cake-card"><div class="cake-img-wrap"><img src="images\pirog2.png" alt=""></div><div class="cake-body"><div class="cake-name">Аарцтай пирог</div><div class="cake-ing">Гурил, сахар, масло, өндөг, сүү, цөцгий, шоколад</div><button class="cake-btn">5,200₮</button></div></div>
+    <div class="cake-card"><div class="cake-img-wrap"><img src="images\pirog3.png" alt=""></div><div class="cake-body"><div class="cake-name">Алимтай пирог</div><div class="cake-ing">Гурил, сахар, масло, өндөг, сүү, цөцгий, шоколад</div><button class="cake-btn">4,750₮</button></div></div>
+  </div>
+
+  <div class="cat"><h3>Тэргүүн — Pastries</h3></div>
+  <div class="grid">
+    <div class="cake-card"><div class="cake-img-wrap"><img src="images\terguun6.png" alt=""></div><div class="cake-body"><div class="cake-name">Үзэмтэй тэргүүн</div><div class="cake-ing">Гурил, сахар, масло, өндөг, сүү, цөцгий, шоколад</div><button class="cake-btn">3,800₮</button></div></div>
+    <div class="cake-card"><div class="cake-img-wrap"><img src="images\terguun4.png" alt=""></div><div class="cake-body"><div class="cake-name">Мушгиа тэргүүн</div><div class="cake-ing">Гурил, сахар, масло, өндөг, сүү, цөцгий, шоколад</div><button class="cake-btn">6,500₮</button></div></div>
+    <div class="cake-card"><div class="cake-img-wrap"><img src="images\terguun5.png" alt=""></div><div class="cake-body"><div class="cake-name">Хос тэргүүн</div><div class="cake-ing">Гурил, сахар, масло, өндөг, сүү, цөцгий, шоколад</div><button class="cake-btn">4,200₮</button></div></div>
+    <div class="cake-card"><div class="cake-img-wrap"><img src="images\terguun1.png" alt=""></div><div class="cake-body"><div class="cake-name">Ананастай тэргүүн</div><div class="cake-ing">Гурил, сахар, масло, өндөг, сүү, цөцгий, шоколад</div><button class="cake-btn">4,800₮</button></div></div>
+    <div class="cake-card"><div class="cake-img-wrap"><img src="images\terguun2.png" alt=""></div><div class="cake-body"><div class="cake-name">Шанзтай тэргүүн</div><div class="cake-ing">Гурил, сахар, масло, өндөг, сүү, цөцгий, шоколад</div><button class="cake-btn">4,500₮</button></div></div>
+    <div class="cake-card"><div class="cake-img-wrap"><img src="images\terguun3.png" alt=""></div><div class="cake-body"><div class="cake-name">Персиктэй тэргүүн</div><div class="cake-ing">Гурил, сахар, масло, өндөг, сүү, цөцгий, шоколад</div><button class="cake-btn">4,800₮</button></div></div>
+    <div class="cake-card"><div class="cake-img-wrap"><img src="images\terguun7.png" alt=""></div><div class="cake-body"><div class="cake-name">Кроссант</div><div class="cake-ing">Гурил, сахар, масло, өндөг, сүү, цөцгий, шоколад</div><button class="cake-btn">4,200₮</button></div></div>
+  </div>
+  <div class="cat"><h3>Талх & Еэвэн</h3></div>
+  <div class="grid">
+    <div class="cake-card"><div class="cake-img-wrap"><img src="images\bor.png" alt=""></div><div class="cake-body"><div class="cake-name">Бор еэвэн</div><div class="cake-ing">Гурил, сахар, масло, өндөг, сүү, цөцгий, шоколад</div><button class="cake-btn">5,200₮</button></div></div>
+    <div class="cake-card"><div class="cake-img-wrap"><img src="images\talh.png" alt=""></div><div class="cake-body"><div class="cake-name">Швед талх</div><div class="cake-ing">Гурил, сахар, масло, өндөг, сүү, цөцгий, шоколад</div><button class="cake-btn">5,700₮</button></div></div>
+  </div>
+</section>
+
+<!-- SAVORY -->
+<section id="savory" class="section">
+  <div class="section-header">
+    <h2>Махан бүтээгдэхүүн <em>Savory</em></h2>
+    <p>Мини пицца, бургер, сэндвич, тэргүүнтэй махан бүтээгдэхүүн</p>
+  </div>
+
+  <div class="cat"><h3>Тэргүүнтэй махан бүтээгдэхүүн</h3></div>
+  <div class="grid">
+    <div class="cake-card"><div class="cake-img-wrap"><img src="images\zaidas.png" alt=""></div><div class="cake-body"><div class="cake-name">Зайдастай тэргүүн</div><div class="cake-ing">Гурил, сахар, масло, өндөг, сүү, цөцгий, шоколад</div><button class="cake-btn">6,200₮</button></div></div>
+    <div class="cake-card"><div class="cake-img-wrap"><img src="images\undugter.png" alt=""></div><div class="cake-body"><div class="cake-name">Өндөг, хиамтай тэргүүн</div><div class="cake-ing">Гурил, сахар, масло, өндөг, сүү, цөцгий, шоколад</div><button class="cake-btn">8,300₮</button></div></div>
+    <div class="cake-card"><div class="cake-img-wrap"><img src="images\tahia.png" alt=""></div><div class="cake-body"><div class="cake-name">Тахиан мах BBQ тэргүүн</div><div class="cake-ing">Гурил, сахар, масло, өндөг, сүү, цөцгий, шоколад</div><button class="cake-btn">7,500₮</button></div></div>
+  </div>
+
+  <div class="cat"><h3>Мини пицца</h3></div>
+  <div class="grid">
+    <div class="cake-card"><div class="cake-img-wrap"><img src="images\pizza3.png" alt=""></div><div class="cake-body"><div class="cake-name">Хавай мини пицца</div><div class="cake-ing">Зуурмаг, улаан лооль соус, бяслаг, хиам, ананас</div><div class="prices"><span class="price">₮6,500</span></div><button class="cake-btn">6,500₮</button></div></div>
+    <div class="cake-card"><div class="cake-img-wrap"><img src="images\pizza1.png" alt=""></div><div class="cake-body"><div class="cake-name">Зайдсан мини пицца</div><div class="cake-ing">Зуурмаг, улаан лооль соус, бяслаг, зайдас, хүнсний ногоо</div><div class="prices"><span class="price">₮6,500</span></div><button class="cake-btn">6,500₮</button></div></div>
+    <div class="cake-card"><div class="cake-img-wrap"><img src="images\pizza2.png" alt=""></div><div class="cake-body"><div class="cake-name">Дэлбээт мини пицца</div><div class="cake-ing">Зуурмаг, бяслаг, зайдас — цэцгэн хэлбэртэй</div><div class="prices"><span class="price">₮5,500</span></div><button class="cake-btn">5,500₮</button></div></div>
+  </div>
+
+  <div class="cat"><h3>Бургер & Сэндвич</h3></div>
+  <div class="grid">
+    <div class="cake-card"><div class="cake-img-wrap"><img src="images\burger.png" alt=""></div><div class="cake-body"><div class="cake-name">Чезбургер</div><div class="cake-ing">Талх, үхрийн мах, бяслаг, нимгэн навч, улаан лооль</div><button class="cake-btn">7,500₮</button></div></div>
+    <div class="cake-card"><div class="cake-img-wrap"><img src="images\miniburger.png" alt=""></div><div class="cake-body"><div class="cake-name">Мини бургер сет (3ш)</div><div class="cake-ing">Талх, үхрийн мах, бяслаг, нимгэн навч, улаан лооль</div><button class="cake-btn">8,000₮</button></div></div>
+    <div class="cake-card"><div class="cake-img-wrap"><img src="images\sandwich.png" alt=""></div><div class="cake-body"><div class="cake-name">Сэндвич</div><div class="cake-ing">Цагаан талх, хиам, нимгэн навч, бяслаг</div><button class="cake-btn">6,800₮</button></div></div>
+  </div>
+</section>
+<!-- Захиалгын самбар -->
+<div id="orderModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeOrderModal()">&times;</span>
+
+    <h2>Захиалга өгөх</h2>
+
+    <p>
+      Та <strong>7000-0004</strong> утсаар болон
+      <strong>FB чатаар</strong> захиалга өгөх боломжтой.
+    </p>
+
+    <div class="modal-buttons">
+      <a href="tel:70000004" class="call-btn">📞 Залгах</a>
+
+      <a href="https://www.facebook.com/batbaigal/"
+         target="_blank"
+         class="fb-btn">
+         💬 FB Чат
+      </a>
+    </div>
+  </div>
+</div>
+</main>
+
+<footer>
+  <strong>Захиалгын утас: 7000-0004</strong>
+  Facebook: Batbaigali Bakery<br>
+  1996 - 2026<br>
+  Улаанбаатар хот
+</footer>
+
+<script>
+function show(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function openOrderModal() {
+    document.getElementById("orderModal").style.display = "block";
+}
+
+function closeOrderModal() {
+    document.getElementById("orderModal").style.display = "none";
+}
+
+window.onclick = function(event) {
+    const modal = document.getElementById("orderModal");
+
+    if (event.target === modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+</body>
+</html>
